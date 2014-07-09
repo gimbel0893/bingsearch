@@ -26,7 +26,11 @@ class BingSearch(object):
                                     urllib2.quote("'{}'".format(query)),
                                     limit, offset, format)
         r = requests.get(url, auth=('', self.api_key))
-        return Result(r.json()['d']['results'])
+        try:
+            results = Result(r.json()['d']['results'])
+        except Exception as e:
+            raise Exception(e, r.text)
+        return results
 
 class Result(object):
 
