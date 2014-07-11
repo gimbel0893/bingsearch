@@ -1,3 +1,5 @@
+import logging
+log = logging.getLogger(__name__)
 import urllib2
 import requests
 
@@ -14,7 +16,9 @@ class BingSearch(object):
         return self._search(query, limit, offset, format)
 
     def search_all(self, query, limit=50, format='json'):
+        log.error('query={}, limit={}.'.format(query, limit))
         results = self._search(query, limit, 0, format)
+        log.error('total={}, length={}, limit={}.'.format(results.total, len(results), limit))
         while results.total > len(results) and len(results) < limit:
             max = limit - len(results)
             more_results = self._search(query, max, len(results), format)
