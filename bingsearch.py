@@ -21,6 +21,7 @@ class BingSearch(object):
         log.error('total={}, length={}, limit={}.'.format(results.total, len(results), limit))
         while results.total > len(results) and len(results) < limit:
             max = limit - len(results)
+            log.error('getting more results, max={}.'.format(max))
             more_results = self._search(query, max, len(results), format)
             results += more_results
         return results
