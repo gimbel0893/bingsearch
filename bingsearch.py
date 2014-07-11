@@ -1,5 +1,5 @@
 import logging
-log = logging.getLogger(__name__)
+log = logging.getLogger('mike')
 import urllib2
 import requests
 
