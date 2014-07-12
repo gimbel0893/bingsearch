@@ -21,11 +21,11 @@ CLASSIFIERS = [
 
 setup(
     name='bingsearch',
-    version='0.5',
-    author=u'Guitarparty.com',
-    author_email='oss@guitarparty.com',
+    version='1.0',
+    author=u'gimbel0893',
+    author_email='mgimbel@rightbrainnetworks.com',
     py_modules=['bingsearch'],
-    url='http://github.com/guitarparty/bingsearch',
+    url='http://github.com/gimbel0893/bingsearch',
     license='MIT',
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
