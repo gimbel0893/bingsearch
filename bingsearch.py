@@ -16,10 +16,13 @@ class BingSearch(object):
 
     def search_all(self, query, limit=50, offset=0, format='json'):
         results, left, offset = self._search_all(query, limit, offset, format)
-        while len(results) < limit:
-            more_results, left, offset = self._search_all(query, left, offset,
-                                                          format)
-            results += more_results
+        if results:
+            while len(results) < limit:
+                more_results, left, offset = self._search_all(query, left,
+                                                              offset, format)
+                if not more_results:
+                    break
+                results += more_results
         return results
 
     def _search_all(self, query, limit, offset, format):
