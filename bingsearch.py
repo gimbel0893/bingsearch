@@ -7,6 +7,7 @@ class BingSearch(object):
     # Bing Search API 2.0
     QUERY_URL = 'https://api.datamarket.azure.com/Bing/Search/Web' \
                  + '?Query={}&$top={}&$skip={}&$format={}'
+    MAX = 50
 
     def __init__(self, api_key):
         self.api_key = api_key
@@ -20,13 +21,11 @@ class BingSearch(object):
         self.counter = 0
         print 'GIMBEL 1 - query={}, limit={}, offset={}, format={}.'.format(query, limit, offset, format)
         results, left, offset = self._search_all(query, limit, offset, format)
-        if results:
-            while len(results) < limit:
-                more_results, left, offset = self._search_all(query, left,
-                                                              offset, format)
-                if not more_results:
-                    break
-                results += more_results
+        more_results = results
+        while len(more_results) >= self.MAX and len(results) < limit:
+            more_results, left, offset = self._search_all(query, left,
+                                                          offset, format)
+            results += more_results
         return results
 
     def _search_all(self, query, limit, offset, format):
