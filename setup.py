@@ -21,7 +21,7 @@ CLASSIFIERS = [
 
 setup(
     name='bingsearch',
-    version='1.0',
+    version='1.1',
     author=u'gimbel0893',
     author_email='mgimbel@rightbrainnetworks.com',
     py_modules=['bingsearch'],
