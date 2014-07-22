@@ -11,15 +11,11 @@ class BingSearch(object):
 
     def __init__(self, api_key):
         self.api_key = api_key
-        self.counter = 0
-        self.unique = {}
 
     def search(self, query, limit=50, offset=0, format='json'):
         return self._search(query, limit, offset, format)
 
     def search_all(self, query, limit=50, offset=0, format='json'):
-        self.counter = 0
-        print 'GIMBEL 1 - query={}, limit={}, offset={}, format={}.'.format(query, limit, offset, format)
         results, left, offset = self._search_all(query, limit, offset, format)
         more_results = results
         while len(more_results) >= self.MAX and len(results) < limit:
@@ -29,14 +25,9 @@ class BingSearch(object):
         return results
 
     def _search_all(self, query, limit, offset, format):
-        self.counter += 1
-        print 'GIMBEL 1.1 - counter={}, limit={}, offset={}.'.format(self.counter, limit, offset)
         results = self._search(query, limit, offset, format)
-        for r in results:
-            self.unique[r.id] = 1
         limit -= len(results)
         offset += len(results)
-        print 'GIMBEL 1.2 - results={}, unique={}, limit={}, offset={}.'.format(len(results), len(self.unique), limit, offset)
         return results, limit, offset
 
     def _search(self, query, limit, offset, format):
