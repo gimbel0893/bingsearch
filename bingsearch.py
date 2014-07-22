@@ -22,10 +22,12 @@ class BingSearch(object):
         print 'GIMBEL 1 - query={}, limit={}, offset={}, format={}.'.format(query, limit, offset, format)
         results, left, offset = self._search_all(query, limit, offset, format)
         more_results = results
-        while len(more_results) >= self.MAX and len(results) < limit:
+        print 'limit={}, left={}, offset={}, more_results={}, results={}.'.format(limit, left, offset, len(more_results), len(results))
+        while len(more_results) == self.MAX and len(results) < limit:
             more_results, left, offset = self._search_all(query, left,
                                                           offset, format)
             results += more_results
+            print 'limit={}, left={}, offset={}, more_results={}, results={}.'.format(limit, left, offset, len(more_results), len(results))
         return results
 
     def _search_all(self, query, limit, offset, format):
